@@ -1,0 +1,84 @@
+CREATE TABLE Personagem(
+	personagemId int PRIMARY KEY,
+	nome varchar(30) NOT NULL,
+	urlImg varchar (300),
+        descricao varchar (300),
+	nivel int,
+	forca int NOT NULL,
+	destreza int NOT NULL,
+	constituicao int NOT NULL,
+	sabedoria int NOT NULL,
+	inteligencia int NOT NULL,
+	carisma int NOT NULL);
+
+CREATE TABLE Sistema(
+	sistemaId int PRIMARY KEY,
+	nome varchar(50) NOT NULL UNIQUE);
+
+CREATE TABLE Classe(
+	classeId int PRIMARY KEY,
+	nomeClasse varchar(50),
+	Descricao varchar(300),
+	hpInicial int NOT NULL,
+	hpNivel int NOT NULL,
+	nivelMax int NOT NULL,
+	sistemaId int NOT NULL,
+	CONSTRAINT FK_CLASSE_SISTEMA FOREIGN KEY(sistemaId) REFERENCES sistema(SistemaId) ON UPDATE CASCADE ON DELETE NO ACTION,
+	CONSTRAINT UK_CLASSE UNIQUE (sistemaId, nomeClasse));
+
+CREATE TABLE Raca(
+	racaId int PRIMARY KEY,
+	nomeRaca varchar(50),
+	descricao varchar(300),
+	forca int NOT NULL,
+	destreza int NOT NULL,
+	constituicao int NOT NULL,
+	sabedoria int NOT NULL,
+	inteligencia int NOT NULL,
+	carisma int NOT NULL,
+	sistemaId int NOT NULL,
+	CONSTRAINT FK_RACA_SISTEMA FOREIGN KEY (sistemaId) REFERENCES sistema(SistemaId) ON UPDATE CASCADE ON DELETE NO ACTION,
+	CONSTRAINT UK_RACA UNIQUE (sistemaId, nomeRaca));
+
+CREATE TABLE Personagem_Sistema(
+	personagemId int,
+	sistemaId int,
+	classeId int,
+	racaId int,
+	hp int NOT NULL,
+	nivel int NOT NULL,
+	forca int NOT NULL,
+	destreza int NOT NULL,
+	constituicao int NOT NULL,
+	sabedoria int NOT NULL,
+	inteligencia int NOT NULL,
+	carisma int NOT NULL,
+	CONSTRAINT PK_PERSONAGEM_SISTEMA_CLASSE_RACA PRIMARY KEY (personagemId, sistemaId, classeId, racaId),
+	CONSTRAINT FK_PERSONAGEM FOREIGN KEY (personagemId) REFERENCES personagem(personagemId) ON UPDATE CASCADE ON DELETE NO ACTION,
+	CONSTRAINT FK_SISTEMA FOREIGN KEY (sistemaId) REFERENCES sistema(sistemaId) ON UPDATE CASCADE ON DELETE NO ACTION,
+	CONSTRAINT FK_CLASSE FOREIGN KEY (classeId) REFERENCES classe(classeId) ON UPDATE CASCADE ON DELETE NO ACTION,
+	CONSTRAINT FK_RACA FOREIGN KEY (racaId) REFERENCES raca(racaId) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+insert into sistema
+values (1, 'tormenta');
+
+insert into classe
+values (1, 'Guerreiro', 'Warrior', 20, 5, 20, 1);
+insert into classe
+values (2, 'Mago', 'Mage', 15, 5, 20, 1);
+insert into classe
+values (3, 'Arqueiro', 'Hunter', 15, 5, 20, 1);
+insert into classe
+values (4, 'Ladino', 'Rogue', 15, 5, 20, 1);
+
+insert into raca
+values (1, 'Humano', 'Human', 2, 0, 0, -1, 0, 1, 1);
+insert into raca
+values (2, 'Elfo', 'Elf', 0, 2, 0, 1, 0, -1, 1);
+insert into raca
+values (3, 'Anão', 'Dwarf', 0, 2, -1, 0, 0, 1, 1);
+insert into raca
+values (4, 'Orc', 'Orc', 2, 0, 1, 0, 0, -1, 1);
