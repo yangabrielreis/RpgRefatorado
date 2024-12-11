@@ -32,17 +32,7 @@ public class MenusControllerTest {
         MenusController controller = new MenusController();
         assertTrue(controller.personagens.isEmpty(), "A lista de personagens deve ser inicializada vazia.");
     }
-/*
-    @Test
-    public void botaoAdicionar_DeveTerEstiloCorreto() {
-        MenusController controller = new MenusController();
-        Button btnAdicionar = new Button("+ Adicionar");
-        btnAdicionar.setStyle("-fx-background-color: #007ACC; -fx-background-radius: 8;");
 
-        assertEquals("+ Adicionar", btnAdicionar.getText());
-        assertEquals("-fx-background-color: #007ACC; -fx-background-radius: 8;", btnAdicionar.getStyle());
-    }
-*/
     @Test
     public void gradienteRGB_DeveCalcularOffsetCorretamente() {
         double currentTime = System.currentTimeMillis() % 3000;
@@ -50,20 +40,7 @@ public class MenusControllerTest {
 
         assertTrue(offset >= 0.0 && offset <= 1.0, "Offset deve estar entre 0.0 e 1.0.");
     }
-/*
-    @Test
-    public void exibirTelaVerPersonagens_DeveExibirMensagemQuandoListaVazia() {
-        MenusController controller = new MenusController();
-        PersonagemSistemaDBDAO mockDao = mock(dao);
 
-        try {
-            when(mockDao.listar()).thenReturn(Collections.emptyList());
-            List<PersonagemSistema> personagens = mockDao.listar();
-            assertTrue(personagens.isEmpty(), "A lista de personagens deve estar vazia.");
-        } catch (SQLException e) {
-            fail("Nenhuma exceção deve ser lançada ao buscar personagens.");
-        }
-    }*/
 
     @Test
     public void testeAtributo_DeveRetornarValorEntre1e20() {
