@@ -5,6 +5,7 @@ module com.trabalhojava.sistemarpg {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires transitive java.sql;
+    requires org.testng;
 
     opens com.trabalhojava.sistemarpg.controller to javafx.fxml;
     exports com.trabalhojava.sistemarpg.controller;
